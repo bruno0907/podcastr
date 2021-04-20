@@ -1,11 +1,5 @@
-import { Header } from "../components/Header";
-import GlobalStyles from "./styles/global";
-
 export default function Home() {
   return (
-    <>
-      <GlobalStyles />
-      <Header />
-    </>
+    <h1>Home</h1>
   )
 }

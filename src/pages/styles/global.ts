@@ -16,6 +16,9 @@ const GlobalStyles = createGlobalStyle`
     --purple-400: #9164FA; 
     --purple-500: #8257E5;
     --purple-800: #6F48C9;   
+
+    --font-title: Lexend, sans-serif;
+    --font-regular: Inter, sans-serif;
   }
 
   *{
@@ -35,13 +38,13 @@ const GlobalStyles = createGlobalStyle`
   button{
     font-size: 1rem;
     font-weight: 500;
-    font-family: Inter, sans-serif;
+    font-family: var(--font-regular);
     color: var(--gray-500);
   }
 
   h1, h2, h3, h4, h5, h6{
     font-weight: 600;
-    font-family: Lexend, sans-serif;
+    font-family: var(--font-title);
     color: var(--gray-800);
   }  
 
