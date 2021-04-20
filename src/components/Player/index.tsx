@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import * as Styled from './styles'
 
-export function Player(){
+export function Player() {
   const [isEmpty, setIsEmpty] = useState(true);
 
   return( 

@@ -1,20 +1,21 @@
 
-import GlobalStyles from "./styles/global"
-import * as Styled from './styles/app'
+import GlobalStyles from "../styles/global"
+import * as Styled from '../styles/app'
 
-import { Header } from "../components/Header"
-import { Player } from "../components/Player"
+import { Header, Player } from '../components'
 
 function MyApp({ Component, pageProps }) {
-  return (    
-    <Styled.Container>
-    <GlobalStyles />
-      <main>
-        <Header />
-        <Component {...pageProps} />
-      </main>
-      <Player />
-    </Styled.Container>       
+  return (
+    <>
+      <GlobalStyles />
+      <Styled.Container>
+        <main>
+          <Header />
+          <Component {...pageProps} />
+        </main>
+        <Player />
+      </Styled.Container>       
+    </>    
   )
 }
 

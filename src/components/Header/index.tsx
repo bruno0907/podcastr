@@ -3,11 +3,10 @@ import ptBr from 'date-fns/locale/pt-BR'
 
 import * as Styled from './styles'
 
-export function Header(){
+export function Header() {
   const currentDate = format(new Date(), 'EEEEEE, d MMMM', {
     locale: ptBr
   })
-
 
   return(
     <Styled.Container>
