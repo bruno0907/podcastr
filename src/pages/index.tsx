@@ -20,12 +20,12 @@ export interface IEpisode{
   durationAsString: string;
 }
 
-interface IHome{
+interface IHomePage{
   latestEpisodes: IEpisode[];
   allEpisodes: IEpisode[]
 }
 
-export default function Home({ latestEpisodes, allEpisodes }: IHome) {
+export default function Home({ latestEpisodes, allEpisodes }: IHomePage) {
   return (
     <Styled.Container>      
       <LatestEpisodes episodes={latestEpisodes} />

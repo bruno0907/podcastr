@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Link from 'next/link'
+
 import * as Styled from './styles'
 
 import { IEpisode } from '../../pages'
@@ -27,7 +29,9 @@ export const LatestEpisodes = ({ episodes }: IEpisodes) => {
                 />
               </div>
               <Styled.EpisodeDetails>
-                <a href="">{episode.title}</a>
+                <Link href={`/episodes/${episode.id}`}>
+                  <a>{episode.title}</a>
+                </Link>
                 <p>{episode.members}</p>
                 <div>
                   <span>{episode.publishedAt}</span>
