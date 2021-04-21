@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import * as Styled from './styles'
 
 import { IEpisode } from '../../pages'
@@ -9,22 +10,34 @@ interface IEpisodes{
 export const LatestEpisodes = ({ episodes }: IEpisodes) => {
   return(
     <Styled.Container>
-      <h2>Últimos lançamentos</h2>
+      <Styled.Title>Últimos lançamentos</Styled.Title>
+
       <ul>
         {episodes.map((episode: IEpisode) => {
           return(
-            <li key={episode.id}>
-              <img src={episode.thumbnail} alt={episode.title}/>
+            <Styled.Episode key={episode.id}>
               <div>
+                <Image 
+                  src={episode.thumbnail} 
+                  alt={episode.title}
+                  width={192}
+                  height={192}
+                  objectFit="cover"                
+                  loading="lazy"                
+                />
+              </div>
+              <Styled.EpisodeDetails>
                 <a href="">{episode.title}</a>
                 <p>{episode.members}</p>
-                <span>{episode.publishedAt}</span>
-                <span>{episode.durationAsString}</span>
-              </div>
-              <button>
+                <div>
+                  <span>{episode.publishedAt}</span>
+                  <span>{episode.durationAsString}</span>
+                </div>
+              </Styled.EpisodeDetails>
+              <Styled.EpisodePlayButton>
                 <img src="/play-green.svg" alt="Ouvir episódio"/>
-              </button>
-            </li>
+              </Styled.EpisodePlayButton>
+            </Styled.Episode>
           )
         })}
       </ul>

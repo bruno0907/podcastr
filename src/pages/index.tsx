@@ -6,7 +6,7 @@ import { api } from '../services/api'
 import { convertDurationToTimeString } from '../utils'
 
 import * as Styled from '../styles/home'
-import { LatestEpisodes, EpisodesList } from '../components'
+import { LatestEpisodes, AllEpisodes } from '../components'
 
 export interface IEpisode{  
   id: string;  
@@ -29,7 +29,7 @@ export default function Home({ latestEpisodes, allEpisodes }: IHome) {
   return (
     <Styled.Container>      
       <LatestEpisodes episodes={latestEpisodes} />
-      <EpisodesList episodes={allEpisodes} />      
+      <AllEpisodes episodes={allEpisodes} />      
     </Styled.Container>
   )
 }

@@ -1,4 +1,4 @@
 export * from './Header'
 export * from './Player'
 export * from './LatestEpisodes'
-export * from './EpisodesList'
+export * from './AllEpisodes'
