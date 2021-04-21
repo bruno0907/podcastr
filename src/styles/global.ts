@@ -18,14 +18,14 @@ const GlobalStyles = createGlobalStyle`
     --purple-800: #6F48C9;   
 
     --font-title: Lexend, sans-serif;
-    --font-regular: Inter, sans-serif;
+    --font-paragraph: Inter, sans-serif;
   }
 
   *{
     margin: 0;
     padding: 0;
     border: 0;          
-    box-sizing: border-box;
+    box-sizing: border-box;    
   }
 
   body{
@@ -38,7 +38,7 @@ const GlobalStyles = createGlobalStyle`
   button{
     font-size: 1rem;
     font-weight: 500;
-    font-family: var(--font-regular);
+    font-family: var(--font-paragraph);
     color: var(--gray-500);
   }
 
@@ -56,8 +56,16 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.5rem;
   }
 
+  a{
+    text-decoration: none;
+  }
+
   button{
     cursor: pointer;
+  }  
+
+  ul{
+    list-style: none;
   }
 
   @media(max-wdith: 1080px){
