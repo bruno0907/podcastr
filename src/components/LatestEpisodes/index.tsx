@@ -1,7 +1,10 @@
+import { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import * as Styled from './styles'
+
+import { PlayerContext } from '../../contexts/PlayerContext'
 
 import { IEpisode } from '../../pages'
 
@@ -10,6 +13,7 @@ interface IEpisodes{
 }
 
 export const LatestEpisodes = ({ episodes }: IEpisodes) => {
+  const { play } = useContext(PlayerContext)
   return(
     <Styled.Container>
       <Styled.Title>Últimos lançamentos</Styled.Title>
@@ -38,7 +42,7 @@ export const LatestEpisodes = ({ episodes }: IEpisodes) => {
                   <span>{episode.durationAsString}</span>
                 </div>
               </Styled.EpisodeDetails>
-              <Styled.EpisodePlayButton>
+              <Styled.EpisodePlayButton onClick={() => play(episode)}>
                 <img src="/play-green.svg" alt="Ouvir episódio"/>
               </Styled.EpisodePlayButton>
             </Styled.Episode>

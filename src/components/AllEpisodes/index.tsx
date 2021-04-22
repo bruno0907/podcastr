@@ -1,16 +1,21 @@
+import { useContext } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
 import * as Styled from './styles'
 
 import { IEpisode } from '../../pages'
-import { ST } from 'next/dist/next-server/lib/utils'
+
+import { PlayerContext } from '../../contexts/PlayerContext'
 
 interface IEpisodes{
   episodes: IEpisode[];
 }
 
 export const AllEpisodes = ({ episodes }: IEpisodes) => {
+  const { play } = useContext(PlayerContext)
+  
   return(
     <Styled.Container>
       <Styled.Title>Lista de episódios</Styled.Title>
@@ -47,7 +52,7 @@ export const AllEpisodes = ({ episodes }: IEpisodes) => {
                 <td style={{ width: 100 }}>{episode.publishedAt}</td>
                 <td>{episode.durationAsString}</td>
                 <td>
-                  <button>
+                  <button onClick={() => play(episode)}>
                     <img src="/play-green.svg" alt="Ouvir episódio"/>
                   </button>
                 </td>
