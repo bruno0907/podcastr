@@ -9,7 +9,7 @@ import { api } from '../../services/api'
 
 import { convertDurationToTimeString } from '../../utils'
 
-import * as Styled from './styles'
+import * as Styled from '../../styles/episodes'
 
 import { IEpisode } from '../index'
 
