@@ -3,14 +3,20 @@ import Link from 'next/link'
 
 import * as Styled from './styles'
 
-import { IEpisode } from '../../pages'
-import { ST } from 'next/dist/next-server/lib/utils'
+import { usePlayer } from '../../contexts/PlayerContext'
 
-interface IEpisodes{
-  episodes: IEpisode[];
+interface IEpisode{  
+  id: string;  
+  title: string;  
+  members: string;
+  thumbnail: string;
+  publishedAt: string;    
+  durationAsString: string;
 }
 
-export const AllEpisodes = ({ episodes }: IEpisodes) => {
+export const AllEpisodes = () => {
+  const { playList, allEpisodes, latestEpisodes, remainingEpisodes } = usePlayer()
+  
   return(
     <Styled.Container>
       <Styled.Title>Lista de episódios</Styled.Title>
@@ -26,7 +32,7 @@ export const AllEpisodes = ({ episodes }: IEpisodes) => {
           </tr>
         </thead>
         <tbody>
-          {episodes.map((episode: IEpisode) => {
+          {remainingEpisodes.map((episode: IEpisode, index: number) => {
             return(
               <tr key={episode.id}>
                 <td style={{ width: 100 }}>
@@ -47,7 +53,7 @@ export const AllEpisodes = ({ episodes }: IEpisodes) => {
                 <td style={{ width: 100 }}>{episode.publishedAt}</td>
                 <td>{episode.durationAsString}</td>
                 <td>
-                  <button>
+                  <button onClick={() => playList(allEpisodes, index + latestEpisodes.length)}>
                     <img src="/play-green.svg" alt="Ouvir episódio"/>
                   </button>
                 </td>

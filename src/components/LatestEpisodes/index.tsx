@@ -3,19 +3,25 @@ import Link from 'next/link'
 
 import * as Styled from './styles'
 
-import { IEpisode } from '../../pages'
+import { usePlayer } from '../../contexts/PlayerContext'
 
-interface IEpisodes{
-  episodes: IEpisode[];
+interface IEpisode{  
+  id: string;  
+  title: string;  
+  members: string;
+  thumbnail: string;
+  publishedAt: string;    
+  durationAsString: string;
 }
 
-export const LatestEpisodes = ({ episodes }: IEpisodes) => {
+export const LatestEpisodes = () => {
+  const { playList, latestEpisodes, allEpisodes } = usePlayer()
   return(
     <Styled.Container>
       <Styled.Title>Últimos lançamentos</Styled.Title>
 
       <ul>
-        {episodes.map((episode: IEpisode) => {
+        {latestEpisodes.map((episode: IEpisode, index: number) => {
           return(
             <Styled.Episode key={episode.id}>
               <div>
@@ -38,7 +44,7 @@ export const LatestEpisodes = ({ episodes }: IEpisodes) => {
                   <span>{episode.durationAsString}</span>
                 </div>
               </Styled.EpisodeDetails>
-              <Styled.EpisodePlayButton>
+              <Styled.EpisodePlayButton onClick={() => playList(allEpisodes, index)}>
                 <img src="/play-green.svg" alt="Ouvir episódio"/>
               </Styled.EpisodePlayButton>
             </Styled.Episode>

@@ -1,12 +1,16 @@
 import styled, { css } from 'styled-components';
 
 interface IFooter{
-  empty: boolean;
+  isEmpty: boolean;
+}
+
+interface IControlButton{
+  isActive?: boolean;
 }
 
 export const Container = styled.div`
   width: 26.5rem;
-  height: 100vh;
+  min-height: 100vh;
   padding: 3rem 4rem;
   background: var(--purple-500);
   color: var(--white);
@@ -27,7 +31,7 @@ export const Header = styled.header`
     }
 `
 
-export const Player = styled.div`
+export const PlayerWithNoEpisode = styled.div`
   width: 100%;
   height: 20rem;
   border: dashed 3.5px var(--purple-300);
@@ -40,10 +44,42 @@ export const Player = styled.div`
   justify-content: center;
 `
 
+export const PlayerWithEpisode = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+
+  img{
+    border-radius: 1.5rem;    
+    width: 18rem;
+    height: 21rem;
+  }  
+
+
+  h4{
+    display: block;
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5rem;    
+    color: var(--white);
+  }
+
+  p{
+    display: block;
+    margin-top: 1rem;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+  }
+`
+
 export const Footer = styled.footer<IFooter>`
   align-self: stretch;
 
-  ${({ empty }) => empty && css`opacity: 0.5;`}
+  ${({ isEmpty }) => isEmpty && css`
+    cursor: default;
+    opacity: 0.5;
+  `}
 `
 
 export const PlayerProgress = styled.div`
@@ -59,33 +95,17 @@ export const PlayerProgress = styled.div`
     }
 `
 export const ProgressSlider = styled.div`
-  flex: 1;
-  position: relative;
+  flex: 1;  
 `
 
-export const EmptySlider = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+export const EmptySlider = styled.div`  
   width: 100%;
   height: 4px;
   background: var(--purple-300);
   border-radius: 2px;
 `
 
-export const CurrentProgressSlider = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 40%;
-  height: 4px;
-  background: var(--purple-800);
-  border-radius: 2px;
-`
-
-export const PlayerControls = styled.div`
+export const PlayerControlButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,15 +113,46 @@ export const PlayerControls = styled.div`
   gap: 1.5rem;
 `
 
-export const Control = styled.button`
+
+export const ControlButton = styled.button<IControlButton>`
   background: transparent;
   border: 0;
   font-size: 0;
+  transition: filter 150ms;
+
+  :hover:not(:disabled){
+    filter: brightness(0.7);
+  }
+  
+  :disabled{
+    cursor: default;
+    opacity: 0.5
+  }
+
+  ${({ isActive }) => isActive && css`    
+    filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+
+    :hover:not(:disabled){
+      filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+    }    
+  `}
+  
 ` 
 
-export const PlayControl = styled.button`
+export const ControlPlayButton = styled.button`
   width: 4rem;
   height: 4rem;
   border-radius: 1rem;
   background: var(--purple-400);
+  transition: filter 150ms;
+
+  :hover:not(:disabled){
+    filter: brightness(0.95);
+  }
+
+  :disabled{
+    cursor: default;
+    opacity: 0.5
+  }
+  
 `
