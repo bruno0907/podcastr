@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components';
 
 interface IFooter{
-  empty: boolean;
+  isEmpty: boolean;
+}
+
+interface IControlButton{
+  isActive?: boolean;
 }
 
 export const Container = styled.div`
@@ -72,7 +76,10 @@ export const PlayerWithEpisode = styled.div`
 export const Footer = styled.footer<IFooter>`
   align-self: stretch;
 
-  ${({ empty }) => empty && css`opacity: 0.5;`}
+  ${({ isEmpty }) => isEmpty && css`
+    cursor: default;
+    opacity: 0.5;
+  `}
 `
 
 export const PlayerProgress = styled.div`
@@ -98,7 +105,7 @@ export const EmptySlider = styled.div`
   border-radius: 2px;
 `
 
-export const PlayerControls = styled.div`
+export const PlayerControlButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,7 +114,7 @@ export const PlayerControls = styled.div`
 `
 
 
-export const Control = styled.button`
+export const ControlButton = styled.button<IControlButton>`
   background: transparent;
   border: 0;
   font-size: 0;
@@ -119,11 +126,20 @@ export const Control = styled.button`
   
   :disabled{
     cursor: default;
+    opacity: 0.5
   }
+
+  ${({ isActive }) => isActive && css`    
+    filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+
+    :hover:not(:disabled){
+      filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+    }    
+  `}
   
 ` 
 
-export const PlayControl = styled.button`
+export const ControlPlayButton = styled.button`
   width: 4rem;
   height: 4rem;
   border-radius: 1rem;
@@ -136,6 +152,7 @@ export const PlayControl = styled.button`
 
   :disabled{
     cursor: default;
+    opacity: 0.5
   }
   
 `

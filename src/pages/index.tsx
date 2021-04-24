@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { format, parseISO } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { GetStaticProps } from 'next'
@@ -7,8 +8,9 @@ import { convertDurationToTimeString } from '../utils'
 
 import * as Styled from '../styles/home'
 import { LatestEpisodes, AllEpisodes } from '../components'
+import { usePlayer } from '../contexts/PlayerContext'
 
-export interface IEpisode{  
+interface IEpisode{  
   id: string;  
   title: string;
   description: string;
@@ -20,16 +22,30 @@ export interface IEpisode{
   durationAsString: string;
 }
 
-interface IHomePage{
+interface IHome{
   latestEpisodes: IEpisode[];
-  allEpisodes: IEpisode[]
+  remainingEpisodes: IEpisode[];
+  allEpisodes: IEpisode[];
 }
 
-export default function Home({ latestEpisodes, allEpisodes }: IHomePage) {
+export default function Home({ latestEpisodes, remainingEpisodes, allEpisodes }: IHome) {  
+  const { 
+    setLatestEpisodes, 
+    setRemainingEpisodes, 
+    setAllEpisodes, 
+  } = usePlayer()  
+
+  useEffect(() => {
+    setLatestEpisodes(latestEpisodes)
+    setRemainingEpisodes(remainingEpisodes)
+    setAllEpisodes(allEpisodes)    
+
+  }, [])
+
   return (
     <Styled.Container>      
-      <LatestEpisodes episodes={latestEpisodes} />
-      <AllEpisodes episodes={allEpisodes} />      
+      <LatestEpisodes />
+      <AllEpisodes />      
     </Styled.Container>
   )
 }
@@ -62,11 +78,13 @@ export const getStaticProps: GetStaticProps = async () =>{
   })
 
   const latestEpisodes = episodes.slice(0, 2)
-  const allEpisodes = episodes.slice(2, episodes.length)
+  const remainingEpisodes = episodes.slice(2, episodes.length)
+  const allEpisodes = [...latestEpisodes, ...remainingEpisodes]
 
   return {
     props: {
       latestEpisodes,
+      remainingEpisodes,
       allEpisodes
     },
 

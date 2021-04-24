@@ -1,3 +1,5 @@
+
+import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,16 +12,32 @@ import { api } from '../../services/api'
 import { convertDurationToTimeString } from '../../utils'
 
 import * as Styled from '../../styles/episodes'
+import { usePlayer } from '../../contexts/PlayerContext'
 
-import { IEpisode } from '../index'
+interface IEpisode{  
+  id: string;  
+  title: string;
+  description: string;
+  members: string;
+  thumbnail: string;
+  publishedAt: string;
+  url: string;
+  duration: number;
+  durationAsString: string;
+}
 
 interface IEpisodePage{
   episode: IEpisode;
 }
 
 export default function Episode({ episode }: IEpisodePage){
+  const { play } = usePlayer()
+  
   return(
     <Styled.Container>
+      <Head>
+        <title>{episode.title} | Podcastr</title>
+      </Head>
       <Styled.Thumbnail>
         <Link href="/">
           <button>
@@ -33,7 +51,7 @@ export default function Episode({ episode }: IEpisodePage){
           objectFit="cover"
           loading="lazy"
         />
-        <button>
+        <button onClick={() => play(episode)}>
           <img src="/play.svg" alt="Ouvir episódio"/>          
         </button>
       </Styled.Thumbnail>

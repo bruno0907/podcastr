@@ -1,13 +1,17 @@
+import Head from 'next/head'
 import GlobalStyles from "../styles/global"
 import * as Styled from '../styles/app'
 
 import { Header, Player } from '../components'
-import { PlayerProvider } from "../contexts/PlayerContext"
+import { PlayerContextProvider } from "../contexts/PlayerContext"
 
 function MyApp({ Component, pageProps }) {
   return (    
-    <PlayerProvider>
+    <PlayerContextProvider>
       <GlobalStyles />
+      <Head>
+        <title>Podcastr | O melhor para você ouvir, sempre</title>
+      </Head>
       <Styled.Container>
         <main>
           <Header />
@@ -15,7 +19,7 @@ function MyApp({ Component, pageProps }) {
           </main>
           <Player />
       </Styled.Container>       
-    </PlayerProvider>
+    </PlayerContextProvider>
   )
 }
 
